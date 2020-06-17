@@ -7,11 +7,13 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import Artworks from './pages/Artworks';
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { Jumbotron } from "react-bootstrap";
+import ArtworkDetails from "./pages/ArtworkDetails";
 
 const Home = () => (
   <Jumbotron>
@@ -38,8 +40,8 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/other" component={Other} />
+        <Route exact path="/" component={Artworks} />
+        <Route path="/artworks/:id" component={ArtworkDetails} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

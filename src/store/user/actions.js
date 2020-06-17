@@ -1,6 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "./selectors";
+import { selectUser } from './selectors';
 import {
   appLoading,
   appDoneLoading,
@@ -11,6 +12,9 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const ARTWORK_UPDATED = 'ARTWORK_UPDATED';
+export const ARTWORK_POST_SUCCESS = 'ARTWORK_POST_SUCCESS';
+export const BID_POST_SUCCESS = 'BID_POST_SUCCESS';
 
 const loginSuccess = userWithToken => {
   return {
@@ -25,6 +29,21 @@ const tokenStillValid = userWithoutToken => ({
 });
 
 export const logOut = () => ({ type: LOG_OUT });
+
+export const artworkUpdated = artwork => ({
+  type: ARTWORK_UPDATED,
+  payload: artwork
+});
+
+export const artworkPostSuccess = artwork => ({
+  type: ARTWORK_POST_SUCCESS,
+  payload: artwork
+});
+
+export const bidPostSuccess = bid => ({
+  type: BID_POST_SUCCESS,
+  payload: bid
+})
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -107,5 +126,92 @@ export const getUserWithStoredToken = () => {
       dispatch(logOut());
       dispatch(appDoneLoading());
     }
+  };
+};
+
+export const updateMyArtwork = (title, imageUrl, hearts, minimumBid) => {
+  return async (dispatch, getState) => {
+    const { artwork, token } = selectUser(getState());
+    dispatch(appLoading());
+
+    const response = await axios.patch(
+      `${apiUrl}/artworks/${artwork.id}`,
+      {
+        title,
+        imageUrl,
+        hearts,
+        minimumBid
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    // console.log(response);
+
+    dispatch(
+      showMessageWithTimeout("success", false, "update successfull", 3000)
+    );
+    dispatch(artworkUpdated(response.data.artwork));
+    dispatch(appDoneLoading());
+  };
+};
+
+export const postBids = (email, amount) => {
+  return async (dispatch, getState) => {
+    const { artwork, token } = selectUser(getState());
+    // console.log(name, content, imageUrl);
+    dispatch(appLoading());
+
+    const response = await axios.post(
+      `${apiUrl}/artworks/${artwork.id}/bids`,
+      {
+        email,
+        amount
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    // console.log("Yep!", response);
+    dispatch(
+      showMessageWithTimeout("success", false, response.data.message, 3000)
+    );
+    dispatch(bidPostSuccess(response.data.story));
+    dispatch(appDoneLoading());
+  };
+};
+
+export const postArtworks = (title, imageUrl, minimumBid, hearts) => {
+  return async (dispatch, getState) => {
+    const { artwork, token } = selectUser(getState());
+    // console.log(name, content, imageUrl);
+    dispatch(appLoading());
+
+    const response = await axios.post(
+      `${apiUrl}/artworks/${artwork.id}`,
+      {
+        title,
+        imageUrl,
+        minimumBid,
+        hearts
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    // console.log("Yep!", response);
+    dispatch(
+      showMessageWithTimeout("success", false, response.data.message, 3000)
+    );
+    dispatch(artworkPostSuccess(response.data.story));
+    dispatch(appDoneLoading());
   };
 };
