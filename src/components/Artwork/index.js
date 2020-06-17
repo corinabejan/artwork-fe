@@ -11,7 +11,7 @@ export default function Artwork(props) {
       <p>{props.hearts}</p>
       <p>{props.bids.length}</p>
       {props.showLink ? (
-        <Link to={`/artwork/${props.id}`}>
+        <Link to={`/artworks/${props.id}`}>
           <Button>View details</Button>
         </Link>
       ) : null}

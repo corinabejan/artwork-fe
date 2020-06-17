@@ -5,6 +5,8 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case ARTWORK_DETAILS_FETCHED:
+      console.log(action);
+      console.log(action.payload);
       return { ...state, ...action.payload };
 
     default:

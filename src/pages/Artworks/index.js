@@ -30,6 +30,7 @@ export default function Artworks() {
           minimumBid={artwork.minimumbid}
           bids={artwork.bids}
           imageUrl={artwork.imageUrl}
+          showLink={true}
           />
         ))}
       </Container>
