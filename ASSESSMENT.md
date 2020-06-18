@@ -7,7 +7,7 @@
 | 2 Artwork details            | 4          | 4/4  | 0/4       |
 | 3 Giving hearts              | 5          | 3/5  | 0/5       |
 | 4 Bidding                    | 11         | 11/11 | 0/11      |
-| 5 Posting an artwork         | 10         | 0/10 | 0/10      |
+| 5 Posting an artwork         | 10         | 10/10 | 0/10      |
 | 6 Signing up as an artist    | 7          | 7/7  | 0/7       |
 | 7 Finishing up               | 6          | 6/6  | 0/6       |
 | Total                        | 60         | 0/60 | 0/60      |
