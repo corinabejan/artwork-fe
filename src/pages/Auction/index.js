@@ -68,7 +68,7 @@ export default function Auction() {
 
       <Form.Group className="mt-5">
         <Button variant="primary" type="submit" onClick={submitHandler}>
-          Start Auction
+          Start Auction!
         </Button>
       </Form.Group>
     </Form>
