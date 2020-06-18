@@ -47,7 +47,7 @@ export const signUp = (name, email, password, isArtist) => {
         name,
         email,
         password,
-        isArtist,
+        isArtist
       });
 
       dispatch(loginSuccess(response.data));
@@ -152,19 +152,20 @@ export const postBids = (email, amount) => {
   };
 };
 
-export const postArtworks = (title, imageUrl, minimumBid, hearts) => {
+export const postArtwork = (title, imageUrl, minimumBid) => {
   return async (dispatch, getState) => {
     const { artwork, token } = selectUser(getState());
-    // console.log(name, content, imageUrl);
+    console.log(artwork)
+    console.log(title, imageUrl, minimumBid);
     dispatch(appLoading());
 
     const response = await axios.post(
-      `${apiUrl}/artworks/${artwork.id}`,
+      `${apiUrl}/artworks`,
       {
         title,
         imageUrl,
         minimumBid,
-        hearts,
+  
       },
       {
         headers: {
@@ -173,7 +174,7 @@ export const postArtworks = (title, imageUrl, minimumBid, hearts) => {
       }
     );
 
-    // console.log("Yep!", response);
+    console.log("Yep!", response);
     dispatch(
       showMessageWithTimeout("success", false, response.data.message, 3000)
     );

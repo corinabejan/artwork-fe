@@ -31,11 +31,7 @@ export default function SignUp() {
     setEmail("");
     setPassword("");
     setName("");
-    if (isArtist === "checked") {
-      return setIsArtist(true);
-    } else {
-      return setIsArtist(false);
-    }
+    setIsArtist(false)
   }
 
   return (
@@ -79,9 +75,11 @@ export default function SignUp() {
         <Form.Group controlId="formBasicCheckbox">
           <Form.Label>I am an artist</Form.Label>
           <Form.Control
-            value={false}
-            defaultChecked={isArtist}
-            onChange={(event) => setIsArtist(event.target.value)}
+            checked={isArtist}
+            onChange={(event) => {
+              console.log(!isArtist);
+              setIsArtist(!isArtist);
+            }}
             type="checkbox"
           />
         </Form.Group>

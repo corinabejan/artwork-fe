@@ -22,7 +22,7 @@ export default function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/" linkText="Artwork" />
-          <NavbarItem path="/other" linkText="Other" />
+          {token ? <NavbarItem path="/auction" linkText="Start an auction" /> : null}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>

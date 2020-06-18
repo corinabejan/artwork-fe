@@ -7,6 +7,7 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import Auction from './pages/Auction';
 import Artworks from './pages/Artworks';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/artworks/:id" component={ArtworkDetails} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/auction" component={Auction} />
       </Switch>
     </div>
   );

@@ -6,6 +6,7 @@ import { updateMyArtwork } from "../../store/artworksDetails/actions";
 import { selectArtworkDetails } from "../../store/artworksDetails/selectors";
 import { selectToken } from "../../store/user/selectors";
 import Jumbotron from "react-bootstrap/Jumbotron";
+import Image from 'react-bootstrap/Image';
 import Button from "react-bootstrap/Button";
 // import { postBids } from '../../store/user/actions';
 
@@ -16,14 +17,6 @@ export default function ArtworkDetails() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
-  // const [email, setEmail] = useState('');
-  // const [amount, setAmount] = useState('')
-
-  // function submitForm(e) {
-  //   e.preventDefault();
-  //   console.log(email, amount);
-  //   dispatch(postBids(email, amount));
-  // }
 
   const bidsJSX = !Array.isArray(artworks.bids)
     ? null
@@ -39,6 +32,12 @@ export default function ArtworkDetails() {
     dispatch(updateMyArtwork(id, artworks.hearts));
   }
 
+  // function submitBid(e) {
+  //   e.preventDefault();
+
+  //   dispatch(postBid())
+  // }
+
   useEffect(() => {
     dispatch(fetchArtworkById(id));
   }, [dispatch, id]);
@@ -47,26 +46,12 @@ export default function ArtworkDetails() {
     <>
       <Jumbotron>
         <h1>{artworks.title}</h1>
-        <img src={artworks.imageUrl} alt="" />
+        <Image src={artworks.imageUrl} alt="" />
         <p>{artworks.hearts}</p>
         <Button onClick={buttonHandler}>Give hearts</Button>
-      {bidsJSX}
+     {token ? bidsJSX : null}
       </Jumbotron>
-      {/* <input 
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      type="text"
-      placeholder="email"
-      />
-      <input 
-      value={amount}
-      onChange={(e) => setAmount(e.target.value)}
-      type="number"
-      placeholder="amount"
-      />
-        <Button variant="primary" type="submit" onClick={submitForm}>
-          BID
-        </Button> */}
+     
     </>
   );
 }
