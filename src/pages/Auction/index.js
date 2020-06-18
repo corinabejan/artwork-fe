@@ -62,16 +62,6 @@ export default function Auction() {
         ) : null}
       </Form.Group>
 
-      {/* <Form.Group>
-        <Form.Label>Hearts</Form.Label>
-        <Form.Control
-          value={hearts}
-          onChange={event => setHearts(event.target.value)}
-          type="number"
-          placeholder="0"
-        />
-      </Form.Group> */}
-
       <Form.Group className="mt-5">
         <Button variant="primary" type="submit" onClick={submitHandler}>
           Start Auction!

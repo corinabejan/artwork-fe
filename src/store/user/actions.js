@@ -156,8 +156,6 @@ export const postBids = (amount) => {
 export const postArtwork = (title, imageUrl, minimumBid, hearts) => {
   return async (dispatch, getState) => {
     const user = selectUser(getState());
-    const art = getState();
-    console.log('TAG 1', art)
     dispatch(appLoading());
 
     const response = await axios.post(
@@ -176,7 +174,6 @@ export const postArtwork = (title, imageUrl, minimumBid, hearts) => {
       }
     );
     
-    // const newArtwork = art.push(response);
     console.log("Yep!", response);
     dispatch(
       showMessageWithTimeout("success", false, response.data.message, 3000)
