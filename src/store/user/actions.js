@@ -155,30 +155,33 @@ export const postBids = (amount) => {
 
 export const postArtwork = (title, imageUrl, minimumBid, hearts) => {
   return async (dispatch, getState) => {
-    const { token } = selectUser(getState());
-    console.log(title, imageUrl, minimumBid);
+    const user = selectUser(getState());
+    const art = getState();
+    console.log('TAG 1', art)
     dispatch(appLoading());
 
     const response = await axios.post(
       `${apiUrl}/artworks`,
       {
-        title,
-        imageUrl,
-        minimumBid,
-        hearts
+        title: title,
+        imageUrl: imageUrl,
+        minimumBid: minimumBid,
+        hearts: hearts,
+        userId: user.id
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       }
     );
-
+    
+    // const newArtwork = art.push(response);
     console.log("Yep!", response);
     dispatch(
       showMessageWithTimeout("success", false, response.data.message, 3000)
     );
-    dispatch(artworkPostSuccess(response.data.artwork));
+    dispatch(artworkPostSuccess(response.data.artworks));
     dispatch(appDoneLoading());
   };
 };

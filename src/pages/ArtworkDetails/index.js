@@ -31,7 +31,7 @@ export default function ArtworkDetails() {
 
   function buttonHandler(e) {
     e.preventDefault();
-    console.log("artworks:", artworks);
+    
     dispatch(updateMyArtwork(id, artworks.hearts));
   }
 
