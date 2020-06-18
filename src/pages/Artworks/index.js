@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import { fetchArtworks } from '../../store/artworks/actions';
 import { selectArtworks } from '../../store/artworks/selectors';
 import Artwork from '../../components/Artwork';
+import '../../components/Artwork/artwork.css'
 
 
 export default function Artworks() {

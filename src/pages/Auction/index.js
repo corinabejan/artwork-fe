@@ -12,7 +12,7 @@ export default function Auction() {
   const [minimumBid, setMinimumBid] = useState(0);
   const [hearts, setHearts] = useState(0);
   const [imageUrl, setImageUrl] = useState(
-    "https://source.unsplash.com/1600x900/?"
+    "https://source.unsplash.com/50x50/?"
   );
 
   function submitHandler(e) {
