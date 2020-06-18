@@ -124,21 +124,22 @@ export const getUserWithStoredToken = () => {
   };
 };
 
-export const postBids = (email, amount) => {
+export const postBids = (amount) => {
   return async (dispatch, getState) => {
-    const { artwork, token } = selectUser(getState());
-    // console.log(name, content, imageUrl);
+    const user = selectUser(getState());
+    const artwork = getState();
+    const art = artwork.artworksDetails;
     dispatch(appLoading());
 
     const response = await axios.post(
-      `${apiUrl}/artworks/${artwork.id}/bids`,
+      `${apiUrl}/artworks/${art.id}/bids`,
       {
-        email,
+        email: user.email,
         amount,
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       }
     );
@@ -152,10 +153,9 @@ export const postBids = (email, amount) => {
   };
 };
 
-export const postArtwork = (title, imageUrl, minimumBid) => {
+export const postArtwork = (title, imageUrl, minimumBid, hearts) => {
   return async (dispatch, getState) => {
-    const { artwork, token } = selectUser(getState());
-    console.log(artwork)
+    const { token } = selectUser(getState());
     console.log(title, imageUrl, minimumBid);
     dispatch(appLoading());
 
@@ -165,7 +165,7 @@ export const postArtwork = (title, imageUrl, minimumBid) => {
         title,
         imageUrl,
         minimumBid,
-  
+        hearts
       },
       {
         headers: {
